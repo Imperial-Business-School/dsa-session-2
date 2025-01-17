@@ -1,20 +1,5 @@
-# Data Structures & Algorithms
+# Session 2
 
-This is a GitHub Codespace for getting started with Python.
-After the Codespace has started, look to the *Terminal* at the bottom of this window and type:
+This Codespace provides you with a VS Code environment to work through session 2.
 
-```
-python
-```
-
-Press `Enter` and you should see some information on the version of Python, plus a new *prompt* that looks like this:
-
-```
->>>
-```
-
-You can leave this Python prompt by typing;
-
-```
-quit()
-```
+Exercises can be found in session_2.html in the files listing on the left. Recall that you can right-click this file and choose Open Preview to view it in VS Code. Or right-click and choose Download... to save it to your computer, where you can open it in your web browser.
