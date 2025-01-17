@@ -1,0 +1,59 @@
+name: Autograding Tests
+'on':
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: pip install pandas==2.1.4 jupyter==1.0.0 networkx==3.2.1
+
+    - name: Sum of Squares Test
+      uses: classroom-resources/autograding-io-grader@v1
+      id: sum-of-squares-test
+      with:
+        test-name: Sum of Squares
+        command: python ok --score -q sum_of_squares
+        input: ''
+        expected-output: 'Total: 1.0'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Print Grade Test
+      uses: classroom-resources/autograding-io-grader@v1
+      id: print-grade-test
+      with:
+        test-name: Print Grade
+        command: python ok --score -q print_grade
+        input: ''
+        expected-output: 'Total: 1.0'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Weeks Test
+      uses: classroom-resources/autograding-io-grader@v1
+      id: weeks-test
+      with:
+        test-name: Weeks
+        command: python ok --score -q weeks
+        input: ''
+        expected-output: 'Total: 1.0'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:        
+          SUM-OF-SQUARES-TEST_RESULTS: "${{steps.sum-of-squares-test.outputs.result}}"
+          PRINT-GRADE-TEST_RESULTS: "${{steps.print-grade-test.outputs.result}}"
+          WEEKS-TEST_RESULTS: "${{steps.weeks-test.outputs.result}}"
+      with:
+          runners: sum-of-squares-test,print-grade-test,weeks-test
