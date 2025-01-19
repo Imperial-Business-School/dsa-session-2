@@ -6,6 +6,7 @@
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "git.autofetch": true,
+    "git.rebaseWhenSync": true,
     "terminal.integrated.ignoreProcessKeybindingWarnings": true,
     "files.exclude": {
       "**/.github": true,
