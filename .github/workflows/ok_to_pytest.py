@@ -1,44 +1,56 @@
 import subprocess
 import sys
-import pytest
 
-def get_ok_scores():
-    """Run ok --score and parse output for individual test scores"""
+def run_ok_test(test_name):
+    """Run ok --score and check the score for a specific test"""
     result = subprocess.run([sys.executable, 'ok', '--score'], capture_output=True, text=True)
     
-    scores = []
-    in_point_breakdown = False
-    
+    # Find score for specific test
     for line in result.stdout.split('\n'):
-        # Skip empty lines
-        if not line.strip():
-            continue
-            
-        # Check if we're in the point breakdown section
-        if line.strip() == "Point breakdown":
-            in_point_breakdown = True
-            continue
-            
-        # Only process lines in point breakdown section
-        if not in_point_breakdown:
-            continue
-        
-        # Match lines like "test_ses02_solution_print_grade_0: 0.0/1"
-        parts = line.strip().split(': ')
-        if len(parts) == 2:
-            test_name = parts[0]
-            score_parts = parts[1].split('/')
-            if len(score_parts) == 2:
-                score = float(score_parts[0])
-                total = float(score_parts[1])
-                scores.append((test_name, score, total))
+        if test_name in line and ': ' in line:
+            score_part = line.split(': ')[1]
+            actual_score, total_score = map(float, score_part.split('/'))
+            assert actual_score == total_score, f"{test_name} received {actual_score}/{total_score} points instead of full credit"
+            return
     
-    return scores
+    # If we didn't find the test
+    assert False, f"Could not find score for {test_name}"
 
+def test_print_grade_0():
+    run_ok_test("test_ses02_solution_print_grade_0")
 
-ALL_SCORES = get_ok_scores()
+def test_print_grade_1():
+    run_ok_test("test_ses02_solution_print_grade_1")
 
-@pytest.mark.parametrize("test_name,score,total", ALL_SCORES)
-def test_ok_score(test_name, score, total):
-    """Test that each component received full points"""
-    assert score == total, f"{test_name} received {score}/{total} points instead of full credit"
+def test_print_grade_2():
+    run_ok_test("test_ses02_solution_print_grade_2")
+
+def test_print_grade_3():
+    run_ok_test("test_ses02_solution_print_grade_3")
+
+def test_print_grade_4():
+    run_ok_test("test_ses02_solution_print_grade_4")
+
+def test_sum_of_squares_0():
+    run_ok_test("test_ses02_solution_sum_of_squares_0")
+
+def test_sum_of_squares_1():
+    run_ok_test("test_ses02_solution_sum_of_squares_1")
+
+def test_sum_of_squares_2():
+    run_ok_test("test_ses02_solution_sum_of_squares_2")
+
+def test_sum_of_squares_3():
+    run_ok_test("test_ses02_solution_sum_of_squares_3")
+
+def test_weeks_0():
+    run_ok_test("test_ses02_solution_weeks_0")
+
+def test_weeks_1():
+    run_ok_test("test_ses02_solution_weeks_1")
+
+def test_weeks_2():
+    run_ok_test("test_ses02_solution_weeks_2")
+
+def test_weeks_3():
+    run_ok_test("test_ses02_solution_weeks_3")

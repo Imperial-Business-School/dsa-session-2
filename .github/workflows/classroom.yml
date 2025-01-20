@@ -13,16 +13,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Move tests
-      run: rm -rf tests/ && mv tests ../../tests
+      run: rm -rf tests/ && mv .github/workflows/tests tests
     - name: Move .ok file
-      run: rm ses02.ok && mv ses02.ok ../../ses02.ok
+      run: rm ses02.ok && mv .github/workflows/ses02.ok ses02.ok
     - name: Move test script
-      run: mv ok_to_pytest.py ../../test_ok.py
+      run: mv .github/workflows/ok_to_pytest.py test_ok.py
     - name: Python test
       id: python-test
       uses: classroom-resources/autograding-python-grader@v1
       with:
         timeout: 1
+        max-score: 13
         setup-command: 'pip install pandas==2.1.4 jupyter==1.0.0 networkx==3.2.1'
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
