@@ -15,7 +15,7 @@ jobs:
     - name: Move tests
       run: rm -rf tests/ && mv tests ../../tests
     - name: Move .ok file
-      run: rm ses02.ok && mv ses02.py ../../ses02.py
+      run: rm ses02.ok && mv ses02.ok ../../ses02.ok
     - name: Move test script
       run: mv ok_to_pytest.py ../../test_ok.py
     - name: Python test
