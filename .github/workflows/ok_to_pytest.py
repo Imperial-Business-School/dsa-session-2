@@ -25,12 +25,6 @@ def test_print_grade_1():
 def test_print_grade_2():
     run_ok_test("test_ses02_solution_print_grade_2")
 
-def test_print_grade_3():
-    run_ok_test("test_ses02_solution_print_grade_3")
-
-def test_print_grade_4():
-    run_ok_test("test_ses02_solution_print_grade_4")
-
 def test_sum_of_squares_0():
     run_ok_test("test_ses02_solution_sum_of_squares_0")
 

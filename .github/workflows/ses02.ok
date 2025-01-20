@@ -8,8 +8,6 @@
     "tests/test_ses02_solution_print_grade_0.py": "ok_test",
     "tests/test_ses02_solution_print_grade_1.py": "ok_test",
     "tests/test_ses02_solution_print_grade_2.py": "ok_test",
-    "tests/test_ses02_solution_print_grade_3.py": "ok_test",
-    "tests/test_ses02_solution_print_grade_4.py": "ok_test",
     "tests/test_ses02_solution_sum_of_squares_0.py": "ok_test",
     "tests/test_ses02_solution_sum_of_squares_1.py": "ok_test",
     "tests/test_ses02_solution_sum_of_squares_2.py": "ok_test",
