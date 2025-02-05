@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Drop existing pytest files
+      run: rm -f test_*.py *_test.py
     - name: Move tests
       run: rm -rf tests/ && mv .github/workflows/tests tests
     - name: Move .ok file
